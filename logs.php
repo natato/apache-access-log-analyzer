@@ -62,24 +62,19 @@
                 $protocol=str_replace('"', '', $protocol);
                 $responseCode=$splitedRequests[8];
                 $sizeOfRequestedResource=$splitedRequests[9];
+                if(str_contains($sizeOfRequestedResource,"-"))
+                    continue;
                 $searchValue=array_search($remoteHost, $remoteHostArray);
                 if($searchValue===false){
                     array_push($remoteHostArray, $remoteHost);
                     array_push($remoteHostVector, array($searchValue,1));
-                    /*
-                    if(!is_int($sizeOfRequestedResource))
-                         $sizeOfRequestedResource=number_format($sizeOfRequestedResource);
-                    array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
-                    */
+                    //$sizeOfRequestedResource=number_format($sizeOfRequestedResource);
+                    //array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
                 }
                 else{
                     $vectorItem=$remoteHostVector[$searchValue];
                     $vectorItem[1]++;
-                    /*
-                    if(!is_int($sizeOfRequestedResource))
-                        $sizeOfRequestedResource=number_format($sizeOfRequestedResource);
-                    $vectorItem[2]=$vectorItem[2]+$sizeOfRequestedResource;  
-                    */
+                    //$vectorItem[2]=$vectorItem[2]+number_format($sizeOfRequestedResource);  
                     $remoteHostVector[$searchValue]=$vectorItem;
                 }
                 $searchValue2=array_search($responseCode, $statusCodeArray);
