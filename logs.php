@@ -96,9 +96,11 @@
         echo "</tbody></table>";
 
         ?>
+        <!--
         <script type="text/javascript">
             let table = new DataTable('#myTable');
         </script>
+        -->
     </div>
     <div class="col-md-3 col-sm-5">
         <h3>Summaries</h3>
