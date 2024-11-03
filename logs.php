@@ -7,8 +7,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
     <style>
         .row{
-            padding:5px;
-            margin:5px;
+            padding:10px;
+            margin:10px;
         }
     </style>
 </head>    
@@ -41,9 +41,10 @@
             $numberOfTRACERequests=0;
             $remoteHostArray=array();
             $remoteHostVector=array();
-
+            $statusCodeArray=array();
+            $statusCodeVector=array();
             echo "<table id='myTable' class='table table-hover'border='1'><thead><tr><th>Remote Host</th><th>Remote Log Name</th><th>Datetime</th><th>Timezone</th><th>Requested Method</th><th>Requested Resource</th><th>Protocol</th><th>Response Code</th><th>Requested Resource Size</th><th>Referer</th><th>User Agent</th></tr></thead><tbody>";
-            foreach($requests as $request) {
+            foreach($requests as $request){
                 $count += 1;
                 $splitedRequests=explode(" ",$request);
                	//echo $request."<br>";
@@ -65,19 +66,31 @@
                 if($searchValue===false){
                     array_push($remoteHostArray, $remoteHost);
                     array_push($remoteHostVector, array($searchValue,1));
-                    //array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
+                    /*
+                    if(!is_int($sizeOfRequestedResource))
+                         $sizeOfRequestedResource=number_format($sizeOfRequestedResource);
+                    array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
+                    */
                 }
                 else{
                     $vectorItem=$remoteHostVector[$searchValue];
                     $vectorItem[1]++;
-                    try{
-                       //$vectorItem[2]=$vectorItem[2]+$sizeOfRequestedResource;  
-                    }
-                    catch(Exception $e){
-                        $sizeOfRequestedResource=0;
-                        //$vectorItem[2]=$vectorItem[2]+$sizeOfRequestedResource;  
-                    }
+                    /*
+                    if(!is_int($sizeOfRequestedResource))
+                        $sizeOfRequestedResource=number_format($sizeOfRequestedResource);
+                    $vectorItem[2]=$vectorItem[2]+$sizeOfRequestedResource;  
+                    */
                     $remoteHostVector[$searchValue]=$vectorItem;
+                }
+                $searchValue2=array_search($responseCode, $statusCodeArray);
+                if($searchValue2===false){
+                    array_push($statusCodeArray, $responseCode);
+                    array_push($statusCodeVector, array($searchValue2,1));
+                }
+                else{
+                    $vectorItem2=$statusCodeVector[$searchValue2];
+                    $vectorItem2[1]++;
+                    $statusCodeVector[$searchValue2]=$vectorItem2;
                 }
                 if(count($splitedRequests)>10){
                     $referer=$splitedRequests[10];
@@ -114,7 +127,8 @@
                 }
                 else if($requestMethod=="OPTIONS"){
                 	$numberOfOPTIONSRequests++;
-                }       
+                }
+                      
             	echo "<tr><td>".$remoteHost."</td>"."<td>".$remoteLogName."</td>"."<td>".$dateTime."</td>"."<td>".$timezone."</td>"."<td>".$requestMethod."</td>"."<td>".$requestedResource."</td>"."<td>".$protocol."</td>"."<td>".$responseCode."</td>"."<td>".$sizeOfRequestedResource."</td>"."<td>".$referer."</td>"."<td>".$userAgent."</td>"."</tr>";
                 //if($count==5)
                 	//break;
@@ -175,6 +189,24 @@
                      $i++;
             ?>
            <tr><td><?php echo $IP; ?></td><td><?php //echo $totalSize;?></td><td><?php //echo $averageSize; ?></td></tr>
+            <?php
+                endforeach;
+            ?>
+        </table>
+
+    </div>
+    <div class="col-md-4 col-sm-6" style="overflow: scroll; max-height:200px;">
+        <h5>Response Status Code Summaries</h5>
+        <table class="table table-border table-hover">
+            <tr><th>Status Code</th><th>Number of Requests</th></tr>
+            <?php
+                $i=0;
+                foreach($statusCodeVector as $statusVectorItem):
+                    $code=$statusCodeArray[$i];
+                    $totalRequests=$statusCodeVector[$i][1];
+                     $i++;
+            ?>
+           <tr><td><?php echo $code; ?></td><td><?php echo $totalRequests; ?></td></tr>
             <?php
                 endforeach;
             ?>
