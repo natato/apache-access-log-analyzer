@@ -6,9 +6,8 @@
 				width:90%;
 				margin:0 auto;
 			}
-			.col-md-3,.col-sm-7,.col-md-4,.col-md-7{
+			.col-md-3,.col-sm-7,.col-md-4,.col-md-7,.col-md-5{
 				padding:5px;
-				margin:5px;
 			}
 			select[name="incident-type"]{
 				width:18rem;
@@ -25,7 +24,7 @@
 			<div class="row">
 				<h5>Incidents</h5>
 				<div class="col-md-3 col-sm-7">
-					<div class="card" style="width: 18rem;min-height:6rem;">
+					<div class="card" style="width:99%;min-height:6rem;">
 					  	<div class="card-body">
 					    	<h5 class="card-title">Recent</h5>
 					    	<h6 class="card-subtitle mb-2 text-muted">Updated every 5 minutes</h6>
@@ -36,10 +35,10 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-7">
-					<div class="card" style="width: 18rem;min-height:6rem;">
+					<div class="card" style="width: 99%;min-height:6rem;">
 					  	<div class="card-body">
 					    	<h5 class="card-title">Weekly</h5>
-					    	<h6 class="card-subtitle mb-2 text-muted">Updated Daily</h6>
+					    	<h6 class="card-subtitle mb-2 text-muted">Past Week - Updated Daily</h6>
 					    	<p class="card-text">
 						    	<b>20</b> Incidents
 					    	</p>
@@ -47,19 +46,28 @@
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-7">
-					<div class="card" style="width: 18rem;min-height:6rem;">
+					<div class="card" style="width: 99%;min-height:6rem;">
 					  	<div class="card-body">
 					    	<h5 class="card-title">Monthly</h5>
-					    	<h6 class="card-subtitle mb-2 text-muted">Updated Weekly</h6>
+					    	<h6 class="card-subtitle mb-2 text-muted">Past Month - Updated Weekly</h6>
 					    	<p class="card-text">
-						    	<b>500</b> Incidents
+						    	<b>300</b> Incidents
 					    	</p>
 
 					  	</div>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-7">
+					<div class="card" style="width: 99%;min-height:6rem;">
+					  	<div class="card-body">
+					    	<h5 class="card-title">Yearly</h5>
+					    	<h6 class="card-subtitle mb-2 text-muted">Past Year -Updated Monthly</h6>
+					    	<p class="card-text">
+						    	<b>1500</b> Incidents
+					    	</p>
 
+					  	</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -74,6 +82,8 @@
 						    				<option>Recent</option>
 						    				<option>Weekly</option>
 						    				<option>Monthly</option>
+						    				<option>Yearly</option>
+
 						    		</select>
 					    		</div>
 					    	</div>
@@ -96,15 +106,28 @@
 					  	</div>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-12">
-					<div class="card" style="width: 18rem;min-height:10rem;">
+				<div class="col-md-5 col-sm-12">
+					<div class="card" style="width:90%;min-height:10rem;">
 						<div class="card-body">
 						   	<h5 class="card-title">Simple Linear Regression Model</h5>
-						    <h6 class="card-subtitle mb-2 text-muted"></h6>
-						    <p class="card-text">
-							    <?php
+						    <div class="card-subtitle mb-2 text-muted">
+						    	<div class="row">
+						    		<h6 class="col-md-3 col-sm-5">Duration:</h6>
+						    		<select name="incident-type" class="form-control col-md-5 col-sm-7">
+						    				<option>Current Day</option>
+						    				<option>Past Week</option>
+						    				<option>Past Month</option>
+						    				<option>Past Year</option>
 
-								?>
+						    		</select>
+					    		</div>
+						    </div>
+						    <p class="card-text">
+						    	<b>x-axis(x): </b> Number of Request<br>
+						    	<b>y-axis(y):</b>	Total size of response object<br>
+						    	<b>Gradient: </b> 4.5<br>
+						    	<b>y-intercept:</b> 300.5<br>
+						    	<b>y=4.4x+300.5</b><br>
 						    </p>
 
 						</div>
