@@ -12,7 +12,7 @@
         }
     </style>
 </head>    
-<body class="container">
+<body class="container-fluid">
 <div class="row">
     <h3>Log Entries</h3>
     <div class="col-md-9 col-sm-7" style="overflow: scroll; height:300px;">     
@@ -62,19 +62,20 @@
                 $protocol=str_replace('"', '', $protocol);
                 $responseCode=$splitedRequests[8];
                 $sizeOfRequestedResource=$splitedRequests[9];
-                if(str_contains($sizeOfRequestedResource,"-"))
+                if(str_contains($sizeOfRequestedResource,"-") or str_contains($sizeOfRequestedResource,"\n"))
                     continue;
                 $searchValue=array_search($remoteHost, $remoteHostArray);
                 if($searchValue===false){
                     array_push($remoteHostArray, $remoteHost);
-                    array_push($remoteHostVector, array($searchValue,1));
-                    //$sizeOfRequestedResource=number_format($sizeOfRequestedResource);
-                    //array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
+                    $sizeOfRequestedResource=number_format($sizeOfRequestedResource);
+                    array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
                 }
                 else{
                     $vectorItem=$remoteHostVector[$searchValue];
                     $vectorItem[1]++;
-                    //$vectorItem[2]=$vectorItem[2]+number_format($sizeOfRequestedResource);  
+                    $vectorItemArray=explode(",",$vectorItem[2]);
+                    $vectorItem[2]=implode("",$vectorItemArray);
+                    $vectorItem[2]=$vectorItem[2]+$sizeOfRequestedResource;  
                     $remoteHostVector[$searchValue]=$vectorItem;
                 }
                 $searchValue2=array_search($responseCode, $statusCodeArray);
@@ -172,18 +173,22 @@
         </table>
     </div>
     <div class="col-md-4 col-sm-6" style="overflow: scroll; max-height:200px;">
-        <h5>Remote Host Summaries - Size of Response Object(Bytes)</h5>
+        <h5>Remote Host Summaries - Total Size of Response Object(Bytes)</h5>
         <table class="table table-border table-hover">
             <tr><th>IP Address</th><th>Total Size</th><th>Average Size</th></tr>
             <?php
                 $i=0;
                 foreach($remoteHostVector as $remoteVectorItem):
                     $IP=$remoteHostArray[$i];
-                    //$totalSize=$remoteHostVector[$i][2];
-                    //$averageSize=$totalSize/$remoteHostVector[$i][1];
-                     $i++;
+                    $totalSize=$remoteHostVector[$i][2];
+                    //echo "number: ".$remoteHostVector[$i][1]."<br>";
+                    //if(str_contains($remoteHostVector[$i][1],"\n"))
+                        //continue;
+                    $numberOfRequestPerIP=$remoteHostVector[$i][1];
+                    //$averageSize=$totalSize/$numberOfRequestPerIP;
+                    $i++;
             ?>
-           <tr><td><?php echo $IP; ?></td><td><?php //echo $totalSize;?></td><td><?php //echo $averageSize; ?></td></tr>
+           <tr><td><?php echo $IP; ?></td><td><?php echo $totalSize;?></td><td><?php //echo $averageSize; ?></td></tr>
             <?php
                 endforeach;
             ?>
