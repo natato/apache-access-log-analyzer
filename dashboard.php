@@ -77,7 +77,7 @@
 					    	<h5 class="card-title">Incident Details</h5>
 					    	<div class="card-subtitle mb-2 text-muted">
 					    		<div class="row">
-						    		<h6 class="col-md-3 col-sm-5">Select Type:</h6>
+						    		<h6 class="col-md-3 col-sm-5">Incident Type:</h6>
 						    		<select name="incident-type" class="form-control col-md-5 col-sm-7">
 						    				<option>Recent</option>
 						    				<option>Weekly</option>
