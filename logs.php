@@ -17,7 +17,7 @@
     <h3>Log Entries</h3>
     <div class="col-md-9 col-sm-7" style="overflow: scroll; height:300px;">     
         <?php
-            $requests = file('access.log');
+            $requests = file('access.log.1');
             $count = 0;
             $remoteHost=null;
             $remoteLogName=null;
@@ -157,7 +157,7 @@
 <div class="row">
     <div class="col-md-4 col-sm-6" style="overflow: scroll; max-height:200px;">
         <h5>Remote Host Summaries - Number of Requests</h5>
-        <table class="table table-border table-hover">
+        <table class="table table-hover">
             <tr><th>IP Address</th><th>Number of Requests</th></th></tr>
             <?php
                 $i=0;
@@ -174,7 +174,7 @@
     </div>
     <div class="col-md-4 col-sm-6" style="overflow: scroll; max-height:200px;">
         <h5>Remote Host Summaries - Total Size of Response Object(Bytes)</h5>
-        <table class="table table-border table-hover">
+        <table class="table table-hover">
             <tr><th>IP Address</th><th>Total Size</th><th>Average Size</th></tr>
             <?php
                 $i=0;
@@ -197,7 +197,7 @@
     </div>
     <div class="col-md-4 col-sm-6" style="overflow: scroll; max-height:200px;">
         <h5>Response Status Code Summaries</h5>
-        <table class="table table-border table-hover">
+        <table class="table table-hover">
             <tr><th>Status Code</th><th>Number of Requests</th></tr>
             <?php
                 $i=0;
