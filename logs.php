@@ -68,7 +68,7 @@
                 if($searchValue===false){
                     array_push($remoteHostArray, $remoteHost);
                     $sizeOfRequestedResource=number_format($sizeOfRequestedResource);
-                    array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource));
+                    array_push($remoteHostVector, array($searchValue,1,$sizeOfRequestedResource,$sizeOfRequestedResource));
                 }
                 else{
                     $vectorItem=$remoteHostVector[$searchValue];
@@ -76,6 +76,7 @@
                     $vectorItemArray=explode(",",$vectorItem[2]);
                     $vectorItem[2]=implode("",$vectorItemArray);
                     $vectorItem[2]=$vectorItem[2]+$sizeOfRequestedResource;  
+                    $vectorItem[3]=$vectorItem[2]/$vectorItem[1];  
                     $remoteHostVector[$searchValue]=$vectorItem;
                 }
                 $searchValue2=array_search($responseCode, $statusCodeArray);
@@ -183,14 +184,10 @@
                 foreach($remoteHostVector as $remoteVectorItem):
                     $IP=$remoteHostArray[$i];
                     $totalSize=$remoteHostVector[$i][2];
-                    //echo "number: ".$remoteHostVector[$i][1]."<br>";
-                    //if(str_contains($remoteHostVector[$i][1],"\n"))
-                        //continue;
-                    $numberOfRequestPerIP=$remoteHostVector[$i][1];
-                    //$averageSize=$totalSize/$numberOfRequestPerIP;
+                    $averageSize=$remoteHostVector[$i][3];
                     $i++;
             ?>
-           <tr><td><?php echo $IP; ?></td><td><?php echo $totalSize;?></td><td><?php //echo $averageSize; ?></td></tr>
+           <tr><td><?php echo $IP; ?></td><td><?php echo $totalSize;?></td><td><?php echo $averageSize; ?></td></tr>
             <?php
                 endforeach;
             ?>
