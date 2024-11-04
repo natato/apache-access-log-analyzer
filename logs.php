@@ -88,6 +88,8 @@
                     $vectorItem2[1]++;
                     $statusCodeVector[$searchValue2]=$vectorItem2;
                 }
+                $userAgent="";
+                $referer="";
                 if(count($splitedRequests)>10){
                     $referer=$splitedRequests[10];
                     $userAgentArray=array();
