@@ -98,7 +98,6 @@
                         $userAgentArray[$i]=$splitedRequests[$i];
                     }
                     $userAgent=implode(" ",$userAgentArray);
-
                 }
                 if($requestMethod=="HEAD"){
                 	$numberOfHEADRequests++;
@@ -142,20 +141,21 @@
     -->
     </div>
     <div class="col-md-3 col-sm-5">
-        <h3>Summaries</h3>
-        <h5>Method Summaries</h5>
-        <?php
-            echo $numberOfHEADRequests." HEAD requests<br>";
-            echo $numberOfGETRequests." GET requests<br>";
-            echo $numberOfPOSTRequests." POST requests<br>";
-            echo $numberOfPUTRequests." PUT requests<br>";
-            echo $numberOfPATCHRequests." PATCH requests<br>";
-            echo $numberOfDELETERequests." DELETE requests<br>";
-            echo $numberOfCONNECTRequests." CONNECT requests<br>";
-            echo $numberOfTRACERequests." TRACE requests<br>";
-            echo $numberOfOPTIONSRequests." OPTIONS requests<br>";
-        ?>
-     </div>   
+        <div clas="method-summaries">
+            <h5>Method Summaries</h5>
+            <?php
+                echo $numberOfHEADRequests." HEAD requests<br>";
+                echo $numberOfGETRequests." GET requests<br>";
+                echo $numberOfPOSTRequests." POST requests<br>";
+                echo $numberOfPUTRequests." PUT requests<br>";
+                echo $numberOfPATCHRequests." PATCH requests<br>";
+                echo $numberOfDELETERequests." DELETE requests<br>";
+                echo $numberOfCONNECTRequests." CONNECT requests<br>";
+                echo $numberOfTRACERequests." TRACE requests<br>";
+                echo $numberOfOPTIONSRequests." OPTIONS requests<br>";
+            ?>
+        </div>
+    </div>   
 </div>
 <div class="row">
     <div class="col-md-4 col-sm-6" style="overflow: scroll; max-height:200px;">
